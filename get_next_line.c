@@ -6,7 +6,7 @@
 /*   By: aselezen <aselezen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/14 17:37:31 by aselezen          #+#    #+#             */
-/*   Updated: 2026/05/14 19:24:53 by aselezen         ###   ########.fr       */
+/*   Updated: 2026/05/14 20:04:36 by aselezen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,3 +37,8 @@ int	main(void)
 
 	close(fd);
 }
+
+// static char *get_line(char **remainder)
+// {
+    
+// }

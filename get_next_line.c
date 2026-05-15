@@ -6,7 +6,7 @@
 /*   By: aselezen <aselezen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/14 17:37:31 by aselezen          #+#    #+#             */
-/*   Updated: 2026/05/14 20:04:36 by aselezen         ###   ########.fr       */
+/*   Updated: 2026/05/15 18:39:25 by aselezen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,17 +24,37 @@
 
 int	main(void)
 {
-	int		fd;
-	char	buf[30];
-	int		bytes;
+	int	fd;
+	char	buf[BUFFER_SIZE + 1];
+	int	bytes;
+	char	*remainer = NULL;
+	char	*line;
+	char	*nl;
 
-	fd = open("test.txt", 0);
+	fd = open("test.txt", O_RDONLY);
+	if (fd < 0)
+		return (1);
 
-	bytes = read(fd, buf, 6);
-	buf[bytes] = '\0';
+	line = ft_strdup("");
+	while ((bytes = read(fd, buf, BUFFER_SIZE)) > 0)
+	{
+		buf[bytes] = '\0';
+		nl = ft_strchr(buf, NEW_LINE);
+		if (nl)
+		{
+			*nl = '\0';
+			line = ft_strjoin(line, buf);
+			remainer = ft_strdup(nl + 1);
+			break;
+		}
+		else
+			line = ft_strjoin(line, buf);
+	}
 
-	printf("%s\n", buf);
-
+	printf("Line %s\n", line);
+	printf("Remainer %s\n", remainer);
+	free(line);
+	free(remainer);
 	close(fd);
 }
 
